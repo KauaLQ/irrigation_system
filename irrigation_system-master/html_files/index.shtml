@@ -1,0 +1,723 @@
+<!-- para atualizar o arquivo htmldata.c, talvez seja preciso você rodar o script
+python manualmente através do comando python3 makefsdata.py no terminal -->
+
+<!DOCTYPE html>
+<html>
+    <head> 
+        <title>PicoW Webserver</title>
+        <meta charset="utf-8" />
+        <link rel="shortcut icon" type="image/svg" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/raspberrypi/raspberrypi-original.svg">
+        <script src="https://kit.fontawesome.com/a264ca8e95.js" crossorigin="anonymous"></script>
+    </head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        html {
+            scroll-behavior: smooth
+        }
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Kanit", serif;
+            font-weight: 600;
+            font-style: normal;
+        }
+        a{
+            outline: none;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        header{
+            width: 100%;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #E9E6E6;
+        }
+        header .menu{
+            justify-content: right;
+            display: flex;
+            background-color: #00000098;
+            color: #fff;
+            align-items: center;
+            height: 90px;
+        }
+        header .menu img{
+            width: 15%;
+            margin-right: 38%;
+        }
+        header .menu ul{
+            text-align: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        header .menu li {
+            display: inline-block;
+            margin-right: 30px;
+        }
+
+        header .menu a:hover{
+            color: #C51A4A;
+        }
+
+        header .menu a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        body main{
+            display: block;
+            background-color: #fff;
+            width: 90%;
+            padding: 2%;
+            box-shadow: 0 0 10px #999999;
+        }
+        body main #content{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        @media (max-width: 1300px) {
+            header .menu img{
+                margin-right: 20%;
+            }
+        }
+        @media (max-width: 970px) {
+            header .menu img{
+                margin-right: 15%;
+            }
+        }
+        @media (max-width: 910px) {
+            header .menu img{
+                margin-right: 10%;
+            }
+        }
+        /* ============================================================================================================== */
+
+        .pricing-table-title{
+            position: relative;
+            width: 100%;
+            text-align: center;
+            margin: 60px 0 15px 0;
+        }
+        .pricing-table-title:first-child{
+            margin-top: 30px;
+        }
+        .pricing-table-title h2{
+            font-size: 35px;
+            font-weight: 900;
+            color: #C51A4A;
+            letter-spacing: 2px;
+        }
+
+        /* pricing table Style */
+
+        .pricing-table{
+            display: flex;
+            flex-flow: row wrap;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .pricing-table .ptable-item{
+            width: 33.33%;
+            padding: 15px;
+        }
+        .pricing-table .ptable-single{
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        .pricing-table .ptable-header,
+        .pricing-table .ptable-body,
+        .pricing-table .ptable-footer {
+            position: relative;
+            width: 100%;
+            text-align: center;
+            background:#ffffff ;
+            overflow: hidden;
+        }
+        .pricing-table .ptable-title,
+        .pricing-table .ptable-price,
+        .pricing-table .ptable-description,
+        .pricing-table .ptable-action{
+            position: relative;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Pricing table */
+
+        .pricing-table.table .ptable-single:hover{
+            box-shadow: 0 0 10px #999999;
+        }
+        .pricing-table.table .ptable-header{
+            padding: 30px 0 50px 0;
+            background: #C51A4A;
+        }
+        .pricing-table.table  .ptable-item.featured-item .ptable-header{
+            background: #75A928;
+        }
+        .pricing-table.table .ptable-icon{
+            margin-bottom: 15px;
+        }
+        .pricing-table.table .ptable-icon i{
+            display: inline-block;
+            color: #ffffff;
+            font-size: 45px;
+        }
+        .pricing-table.table .ptable-title h2{
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 300;
+            margin-left: 2px;
+        }
+        .pricing-table.table .ptable-price h2{
+            color: #ffffff;
+            font-size: 60px;
+            font-weight: 900;
+            margin-left: 15px;
+        }
+        .pricing-table.table .ptable-price h2 small{
+        position: absolute;
+            font-size: 18px;
+            font-weight: 900;
+            margin-left: -15px;
+            margin-top: 16px;
+        }
+        .pricing-table.table .ptable-price h2 span{
+            font-size: 16px;
+            font-weight: 300;
+            margin-left: 3px;
+            
+        }
+        .pricing-table.table .ptable-body{
+            padding: 30px 0;
+            background: #f7f7f7;
+            border-radius: 30px 30px 0 0;
+            margin-top: -30px;
+        }
+        .pricing-table.table  .ptable-description ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .pricing-table.table  .ptable-description ul li{
+            color: #C51A4A;
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            padding: 7px;
+        }
+        .pricing-table.table  .ptable-description ul li:last-child{
+            border: none;
+        }
+        .pricing-table.table .ptable-footer{
+            padding-bottom: 30px;
+            background: #f7f7f7;
+        }
+
+        .pricing-table.table .ptable-action a{
+            display: inline-block ;
+            padding: 10px 20px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            background: #C51A4A;
+            border-radius: 50px;
+        }
+        .pricing-table.table .ptable-action a i{
+            margin-right: 5px;
+        }
+        .pricing-table.table .ptable-action a:hover{
+            background: #75A928;
+        }
+        .pricing-table.table .ptable-item.featured-item .ptable-action a{
+            background: #75A928;
+        }
+        .pricing-table.table .ptable-item.featured-item .ptable-action a:hover{
+            background: #C51A4A;
+        }
+
+        /* ============================================================================================================== */
+
+        .param{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #f7f7f7;
+            padding-top: 30px;
+            min-width: 500px;
+            align-self: center;
+            box-shadow: 0 0 10px #999999;
+        }
+
+        input[type=range] {
+        width: 200px;
+        -ms-appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        outline: none;
+        cursor: pointer;
+        /*extra*/
+        display: block;
+        margin: 10px 0 0px 0;
+        position: relative;
+        }
+
+        input[type=range]::before,
+        input[type=range]::after {
+        display: inline-block;
+        position: absolute;
+        bottom: -5px;
+        color: #888;
+        }
+
+        input[type=range]::before {
+        content: attr(min);
+        left: 0;
+        /* after */
+        transform: translate(calc(-100% - 5px))
+        }
+
+        input[type=range]::after {
+        content: attr(max);
+        right: 0;
+        /* after */
+        transform: translate(calc(100% + 5px))
+        }
+
+        /* input[type=range]::-moz-range-track,  */
+        /* input[type=range]::-ms-track */
+        input[type=range]::-webkit-slider-runnable-track {
+        background: #222;
+        border-radius: 3px;
+        height: 5px;
+        -webkit-appearance: none;
+        }
+
+        /* input[type=range]::-moz-range-thumb */
+        /* input[type=range]::-ms-thumb */
+        input[type=range]::-webkit-slider-thumb {
+        border: none;
+        box-shadow: none;
+        height: 20px;
+        width: 6px;
+        border-radius: 12px;
+        background: #0097f0;
+        -webkit-appearance: none;
+        margin: -7px 0 0 0;
+        outline: none;
+        }
+
+        .custom-range-slider {
+        position: relative;
+        padding-bottom: 20px;
+        color: #888;
+        }
+
+        .param form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .param output{
+            margin-top: 10px;
+            background-color: #c51a4ad0;
+            padding: 3px 10px 3px 10px;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        .param .ptable-footer{
+            padding-bottom: 30px;
+        }
+
+        .param .ptable-action a{
+            display: inline-block ;
+            padding: 10px 20px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            background: #75A928;
+            border-radius: 50px;
+        }
+        .param .ptable-action a i{
+            margin-right: 5px;
+        }
+        .param .ptable-action a:hover{
+            background: #C51A4A;
+        }
+
+        /* ========================================================================================= */
+    
+        .test-comunication{
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            padding: 20px;
+            border-bottom: solid 2px #75A928;
+            border-left: solid 2px #75A928;
+        }
+
+        .test-comunication h3{
+            font-size: 150%;
+            border-left: solid 5px #75A928;
+            padding-left: 10px;
+        }
+
+        .test-comunication button{
+            width: 100px;
+            height: 50px;
+            font-size: 15px;
+            background-color: #DAE2DF;
+            color: #222;
+            border: none;
+            border-radius: 25px;
+            box-shadow: inset 0px 0px 16px 1px rgb(0, 0, 0, 0.24);
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        .group-buttons{
+            box-shadow: 0 0 10px #999999;
+            min-width: 500px;
+        }
+
+        input[type="checkbox"]{
+            width: 100px;
+            height: 50px;
+            appearance: none;
+            background-color: #DAE2DF;
+            border-radius: 25px;
+            box-shadow: inset 0px 0px 16px 1px rgb(0, 0, 0, 0.24);
+            cursor: pointer;
+            transition: 0.4s;
+            position: relative;
+        }
+        input:checked[type="checkbox"]{
+            background-color: #3DECB1;
+        }
+        input[type="checkbox"]:before{
+            content: '';
+            width: 50px;
+            height: 50px;
+            background-color: #EDE3F1;
+            border-radius: 25px;
+            position: absolute;
+            box-shadow: 0px 4px 8px 1px rgb(0, 0, 0, 0.25);
+            transform: scale(1.1);
+            top: 0;
+            left: 0;
+            transition: 0.4s;
+        }
+        input:checked[type="checkbox"]:before{
+            left: 50px;
+            transition: 0.4s;
+        }
+
+        /* ============================================================================================ */
+
+        footer{
+            width: 100%;
+        }
+
+        footer .general-footer{
+            display: flex;
+            background-color: #00000098;
+            color: #fff;
+            padding: 40px;
+            align-items: center;
+            justify-content: left;
+        }
+
+        footer .general-footer img{
+            width: 200px;
+        }
+
+        footer .general-footer .location, .social{
+            margin-left: 15%;
+        }
+
+        footer .general-footer .location p{
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        footer .general-footer a{
+            margin-left: 10px;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        footer .general-footer i{
+            font-size: 200%;
+        }
+
+        footer .general-footer .social .icons{
+            padding-top: 15px;
+        }
+    </style>
+    <body>
+        <header>
+            <div class="menu">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/raspberrypi/raspberrypi-original-wordmark.svg" />
+                <nav>
+                    <ul>
+                        <li class="li-father"><a href="#content">MEDIÇÕES</a></li>
+                        <li class="li-father"><a href="#param">ALTERAR PARÂMETROS</a>
+                        </li>
+                        <li class="li-father"><a href="#test">TESTAR COMUNICAÇÃO</a></li>
+                        <li class="li-father"><a href="#footer">SOBRE</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="content" id="content">
+                <div class="pricing-table-title">
+                    <h2>MEDIÇÕES</h2>
+                </div>
+                <div class="pricing-table table">
+            
+                    <div class="ptable-item">
+                        <div class="ptable-single">
+            
+                            <div class="ptable-header">
+                                <div class="ptable-icon">
+                                    <i class="fa-solid fa-temperature-three-quarters"></i>
+                                </div>
+                                <div class="ptable-title">
+                                    <h2>Temperatura</h2>
+                                </div>
+                                <div class="ptable-price">
+                                    <h2><!--#temp--> <span>°C</span></h2>
+                                </div>
+                            </div>
+            
+                            <div class="ptable-body">
+                                <div class="ptable-description">
+                                    <ul>
+                                        <li><b>ACIONAR A IRRIGAÇÃO EM:</b></li>
+                                        <li><span style="font-size: 25px;"><!--#temp_val-->°C</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+            
+                            <div class="ptable-footer">
+                                <div class="ptable-action">
+                                    <a href="#param"><i class="fa-solid fa-rotate"></i>ALTERAR</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="ptable-item featured-item">
+                        <div class="ptable-single">
+            
+                            <div class="ptable-header">
+                                <div class="ptable-icon">
+                                    <i class="fa-solid fa-cloud"></i>
+                                </div>
+                                <div class="ptable-title">
+                                    <h2>Umidade do Ar</h2>
+                                </div>
+                                <div class="ptable-price">
+                                    <h2><!--#umid--> <span>%</span></h2>
+                                </div>
+                            </div>
+            
+                            <div class="ptable-body">
+                                <div class="ptable-description">
+                                    <ul>
+                                        <li><b>ACIONAR A IRRIGAÇÃO EM:</b></li>
+                                        <li><span style="font-size: 25px;"><!--#umid_val-->%</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+            
+                            <div class="ptable-footer">
+                                <div class="ptable-action">
+                                    <a href="#param"><i class="fa-solid fa-rotate"></i>ALTERAR</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="ptable-item">
+                        <div class="ptable-single">
+            
+                            <div class="ptable-header">
+                                <div class="ptable-icon">
+                                    <i class="fa-solid fa-droplet"></i>
+                                </div>
+                                <div class="ptable-title">
+                                    <h2>Umidade do Solo</h2>
+                                </div>
+                                <div class="ptable-price">
+                                    <h2><!--#soil--> <span>%</span></h2>
+                                </div>
+                            </div>
+            
+                            <div class="ptable-body">
+                                <div class="ptable-description">
+                                    <ul>
+                                        <li><b>ACIONAR A IRRIGAÇÃO EM:</b></li>
+                                        <li><span style="font-size: 25px;"><!--#soil_val-->%</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+            
+                            <div class="ptable-footer">
+                                <div class="ptable-action">
+                                    <a href="#param"><i class="fa-solid fa-rotate"></i>ALTERAR</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-table-title" id="param">
+                    <h2>ALTERAR PARÂMETROS</h2>
+                </div>
+    
+                <div class="param">
+                    <label class="custom-range-slider range">
+                        Temperatura (°C):
+                        <form action="" oninput="val.value = parseInt(range.value)">
+                            <input type="range" max="40" min="0" value="<!--#temp_val-->" id="range">
+                            <output name="val" for="range"><!--#temp_val--></output> 
+                        </form>
+                    </label>
+                    <label class="custom-range-slider range">
+                        Umidade do Ar (%):
+                        <form action="" oninput="val.value = parseInt(range.value)">
+                            <input type="range" max="100" min="0" value="<!--#umid_val-->" id="range">
+                            <output name="val" for="range"><!--#umid_val--></output> 
+                        </form>
+                    </label>
+                    <label class="custom-range-slider range">
+                        Umidade do Solo (%):
+                        <form action="" oninput="val.value = parseInt(range.value)">
+                            <input type="range" max="100" min="0" value="<!--#soil_val-->" id="range">
+                            <output name="val" for="range"><!--#soil_val--></output> 
+                        </form>
+                    </label>
+    
+                    <div class="ptable-footer">
+                        <div class="ptable-action">
+                            <a href="#" id="switch_params"><i class="fa-solid fa-rotate"></i>ALTERAR</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-table-title" id="test">
+                    <h2>TESTAR COMUNICAÇÃO</h2>
+                </div>
+    
+                <div class="group-buttons">
+                    <div class="test-comunication relay">
+                        <h3 style="margin-right: 157px;">ACIONAR IRRIGAÇÃO</h3>
+                        <input type="checkbox" id="onOff_irrigation">
+                    </div>
+                    <div class="test-comunication led">
+                        <h3 style="margin-right: 120px;">ACIONAR LED ONBOARD</h3>
+                        <input type="checkbox" id="onOff_led">
+                    </div>
+                    <div class="test-comunication refresh">
+                        <h3 style="margin-right: 171px;">ATUALIZAR PÁGINA</h3>
+                        <a href="/index.shtml"><button>UPDATE</button></a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer id="footer">
+            <div class="general-footer">
+                <figure>
+                    <img src="https://embarcatech.cepedi.org.br/img/logo-embarcatech.png" alt="Logo Prefeitura de Fortaleza">
+                </figure>
+                
+                <div class="location">
+                    <p>Av. Treze de Maio, 2081 - Benfica</p>
+                    <p>Fortaleza-CE - CEP: 60040-531</p>
+                    <p>Telefone: (85) 3455-3070</p>
+                </div>
+    
+                <div class="social">
+                    <b><p>CONECTE-SE COM O DEV</p></b>
+                    <div class="icons">
+                        <a href="https://github.com/KauaLQ"><i class="fa-brands fa-square-github"></i></a>
+                        <a href="https://www.linkedin.com/in/kaualimaq/"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#"><i class="fa-brands fa-discord"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // ------------------ IRRIGAÇÃO ------------------
+                var irrigationCheckbox = document.getElementById("onOff_irrigation");
+                var irrigationState = localStorage.getItem("estadoRele");
+
+                if (irrigationState === "1") {
+                    irrigationCheckbox.checked = true;
+                } else {
+                    irrigationCheckbox.checked = false;
+                }
+
+                irrigationCheckbox.addEventListener("change", function() {
+                    var url = this.checked ? "/rele.cgi?rele=1" : "/rele.cgi?rele=0";
+                    localStorage.setItem("estadoRele", this.checked ? "1" : "0");
+                    window.location.href = url;
+                });
+
+                // ------------------ LED ONBOARD ------------------
+                var ledCheckbox = document.getElementById("onOff_led");
+                var ledState = localStorage.getItem("estadoLed");
+
+                if (ledState === "1") {
+                    ledCheckbox.checked = true;
+                } else {
+                    ledCheckbox.checked = false;
+                }
+
+                ledCheckbox.addEventListener("change", function() {
+                    var url = this.checked ? "/led.cgi?led=1" : "/led.cgi?led=0";
+                    localStorage.setItem("estadoLed", this.checked ? "1" : "0");
+                    window.location.href = url;
+                });
+            });
+
+            document.addEventListener("DOMContentLoaded", function() {
+                document.getElementById("switch_params").addEventListener("click", function(event) {
+                    event.preventDefault(); // Evita o comportamento padrão do link
+
+                    // Pegando os valores dos sliders
+                    var tempValue = document.querySelectorAll("input[type='range']")[0].value; // Temperatura
+                    var airHumidityValue = document.querySelectorAll("input[type='range']")[1].value; // Umidade do Ar
+                    var soilValue = document.querySelectorAll("input[type='range']")[2].value; // Umidade do Solo
+
+                    // Construindo a URL com vários parâmetros
+                    var url = "/control.cgi?valor=" + soilValue + "&temp=" + tempValue + "&umid=" + airHumidityValue;
+
+                    window.location.href = url; // Redireciona para o CGI
+                });
+            });
+        </script>
+   </body>
+</html>
