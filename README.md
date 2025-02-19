@@ -6,6 +6,16 @@ Este repositório contém o resultado final dos meus estudos no curso de capacit
 
 Como parte desse aprendizado, desenvolvi este projeto: **um Sistema de Monitoramento e Controle de Irrigação para Pequenas Plantações**. Ele utiliza os sensores **DHT11** (temperatura e umidade do ar) e **LM393** (umidade do solo) para coletar dados ambientais, exibindo as informações em um **display OLED SSD1306**. Além disso, implementei uma **interface web hospedada no próprio Raspberry Pi Pico W0**, permitindo que o usuário visualize os dados em tempo real e ajuste os parâmetros de ativação da irrigação.
 
+<p align="center">
+<img src="useful_files/raspberry_irrigation_esquematic.jpg" alt="Diagrama do Projeto" width="700">
+</p>
+
+<p align="center">
+  <i>Esquemático geral do projeto, feito no SW KiCad 8.0. <a href="https://example.com" target="_blank">Acesse aqui.</a></i>
+</p>
+
+<br>
+
 💡 **Pode parecer simples à primeira vista, mas garanto que o resultado final impressiona!**
 
 Sinta-se à vontade para explorar o repositório! Qualquer dúvida, abra uma issue ou entre em contato. Sua contribuição será muito bem-vinda! Juntos, fortalecemos a _comunidade embarcada!_ 💪
