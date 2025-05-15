@@ -23,8 +23,8 @@ static const dht_model_t DHT_MODEL = DHT11;
 static const uint DATA_PIN = 16;
 
 // Credenciais do WIFI
-const char WIFI_SSID[] = "CLEUDO";
-const char WIFI_PASSWORD[] = "91898487";
+const char WIFI_SSID[] = "SUA REDE";
+const char WIFI_PASSWORD[] = "SUA SENHA";
 
 // Definições dos pinos
 #define rele_pin 17 // Pino onde o relé está conectado
