@@ -19,7 +19,7 @@ set(PICO_BOARD pico_w)
 
 include(pico_sdk_import.cmake)
 
-project(pico_w_webserver)
+project(irrigation_system)
 
 pico_sdk_init()
 
